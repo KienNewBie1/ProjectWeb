@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ProjectWeb.Models.Category>
+<div class="mainmenu pull-left">
+    <ul class="nav navbar-nav collapse navbar-collapse">
+        <li class="active"><a href="index.html">Trang Chủ</a></li>
+        @foreach (var item in Model)
+        {
+            <li class="active"><a href="#">@item.Name</a></li>
+        }
+    </ul>
+</div>
+
+
+@* <link href="/css/font-awesome.min.css" rel="stylesheet"> *@

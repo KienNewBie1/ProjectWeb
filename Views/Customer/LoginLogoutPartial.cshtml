@@ -1,0 +1,16 @@
+﻿@using ProjectWeb.Models
+@{
+    Customer kh = (Customer)Session["UserName"];
+}
+
+@if (Session["UserName"] == null) //Giao diện Login //Tùy chọn để hiển thị
+{
+    <li><a href="~/Customer/Login"><i class="fa fa-sign-in"></i> Đăng Nhập</a></li>
+    <li><a href="~/Customer/Register"><i class="fa fa-plus-circle"></i>Đăng ký</a></li>
+
+}
+else  //Giao diện Logout
+{
+    <li ><a style="color: #fe980f; " href="#">Xin chào:@kh.Name</a></li>
+    <li><a href="~/User/Logout"><i class="fa fa-sign-out"></i> Đăng Xuất</a></li>
+}

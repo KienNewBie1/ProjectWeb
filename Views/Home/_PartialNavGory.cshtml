@@ -1,0 +1,5 @@
+﻿@model IEnumerable<ProjectWeb.Models.Category>
+@foreach (var item in Model)
+{
+    <li><a href="#tshirt" data-toggle="tab">@item.Name</a></li>
+}
