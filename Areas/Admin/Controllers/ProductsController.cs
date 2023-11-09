@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectWeb.Data;
 using ProjectWeb.Models;
+using PagedList.Mvc;
+using PagedList;
+using System.IO;
 
 namespace ProjectWeb.Areas.Admin.Controllers
 {
@@ -18,9 +21,13 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // GET: Admin/Products
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
-        }
+			var products = db.Products.Include(p => p.Category);
+			//int iPageNum = (page ?? 1);
+			//int iSize = 3;
+			//var sp = from s in db.Products where s.Id == id select s;
+			//return Vdiew(sp.ToPagedList(iPageNum, iSize));
+			return View(db.Products.ToList());
+		}
 
         // GET: Admin/Products/Details/5
         public ActionResult Details(int? id)
@@ -47,13 +54,19 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // POST: Admin/Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,CategoryId,Price,Image,Count")] Product product)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "Id,Name,Description,CategoryId,Price,Image,Count")] Product product, HttpPostedFileBase Image)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+				string _FileName = Path.GetFileName(Image.FileName);
+				string _path = Path.Combine(Server.MapPath("/images"), _FileName);
+                Image.SaveAs(_path);
+				product.Image = _FileName;
+				db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

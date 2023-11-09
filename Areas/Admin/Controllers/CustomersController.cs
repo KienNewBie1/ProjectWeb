@@ -124,5 +124,38 @@ namespace ProjectWeb.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpGet]
+        public ActionResult Login()
+		{
+            return View(db.Customers.ToList());
+		}
+        [HttpPost]
+        public ActionResult Login(FormCollection collection)
+        {
+            var tendn = collection["UserName"];
+            var matkhau = collection["Password"];
+            if (String.IsNullOrEmpty(tendn))
+            {
+                ViewData["Loi1"] = "Phải nhập tên đăng nhập";
+            }
+            else if (String.IsNullOrEmpty(matkhau))
+            {
+                ViewData["Loi2"] = "Phải nhập mật khẩu";
+            }
+            else
+            {
+                Customer kh = db.Customers.SingleOrDefault(n => n.UserName == tendn && n.Password == matkhau);
+                //KhachHang kh = db.KhachHangs.SingleOrDefault(n => n.TaiKhoan == tendn && n.MatKhau == matkhau);
+                if (kh != null)
+                {
+                    //ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
+                    Session["UserName"] = kh;
+                    return RedirectToAction("Index", "Products");
+                }
+                else
+                    ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
+            }
+            return View();
+        }
     }
 }

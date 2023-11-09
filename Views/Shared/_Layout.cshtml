@@ -68,8 +68,9 @@
                             <ul class="nav navbar-nav">
 
                                 <li><a href="#"><i class="fa fa-star"></i> Danh Sách Yêu Thích</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
+                                <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                @*<li><a href="~/Cart/Index"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>*@
+                                @Html.Action("PartialCart","Cart")
                                 @*<li><a href="~/User/Logout"><i class="fa fa-sign-out"></i> Đăng Xuất</a></li>*@ 
                                 @*<li><a href="~/Customer/Login"><i class="fa fa-sign-in"></i> Đăng Nhập</a></li>
                                 <li><a href="~/Customer/Register"><i class="fa fa-plus-circle"></i>Đăng ký</a></li>*@ 

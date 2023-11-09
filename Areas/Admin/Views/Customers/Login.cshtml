@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Biểu mẫu Đăng nhập</title>
+    <!-- Đường dẫn đến các tệp CSS Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Đăng nhập</h2>
+        @*<form action="~/Admin/Customers/Login" method="post">*@
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <label>Tài Khoản:</label>
+                <input name="UserName" type="text" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label>Mật khẩu:</label>
+                <input name="Password" type="password" class="form-control" id="pwd">
+            </div>
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+            @*</form>*@
+        }
+        </div>
+
+    <!-- Đường dẫn đến các tệp JavaScript Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

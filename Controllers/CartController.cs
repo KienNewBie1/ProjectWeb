@@ -14,12 +14,24 @@ namespace ProjectWeb.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            return View();
+            List<Cart> lstGioHang = LayGioHang();
+            if (lstGioHang.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.TongSoLuong = TongSoLuong();
+            ViewBag.TongTien = TongTien();
+            return View(lstGioHang);
+            //return View(db.Products.ToList());
         }
         public ActionResult PayPartial()
 		{
             return PartialView();
 		}
+        public ActionResult PartialCart()
+        {
+            return PartialView(db.Products.ToList());
+        }
         public List<Cart> LayGioHang()
         {
             List<Cart> lstGioHang = Session["Cart"] as List<Cart>;
@@ -44,8 +56,9 @@ namespace ProjectWeb.Controllers
             {
                 sp.iCount++;
             }
-            return Redirect(url);
-        }
+			//return RedirectToAction("Index","Cart");
+			return Redirect(url);
+		}
         private int TongSoLuong()
         {
             int iTongSoLuong = 0;

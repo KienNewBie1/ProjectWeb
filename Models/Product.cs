@@ -18,5 +18,6 @@ namespace ProjectWeb.Models
 		public int Count { get; set; }
 		//public BrandModel Brand { get; set;}
 		public Category Category { get; set; }
+		//public Brand Brand { get; set; }
 	}
 }
