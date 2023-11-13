@@ -20,33 +20,41 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class="cart_product">
-                       
-                        <a href=""><img style="width:180px;height:200px" src="~/images/@item.sImages" alt=""></a>
-                    </td>
-                    <td class="cart_description">
-                        <h4><a href="">@item.sName</a></h4>
-                        <p>Web ID: @item.iMaSP</p>
-                    </td>
+            <tr>
+                <td class="cart_product">
+
+                    <a href=""><img style="width:110px;height:110px" src="~/images/@item.sImages" alt=""></a>
+                </td>
+                <td class="cart_description">
+                    <h4><a href="">@item.sName</a></h4>
+                    <p>Web ID: @item.iMaSP</p>
+                </td>
+                @using (Html.BeginForm("CapNhatGioHang", "Cart", new { iMaSach = item.iMaSP }))
+                {
                     <td class="cart_price">
                         <p>$@item.dPrice</p>
                     </td>
                     <td class="cart_quantity">
                         <div class="cart_quantity_button">
-                            <a class="cart_quantity_up" href=""> + </a>
-                            <input class="cart_quantity_input" type="number" name="quantity" value="@item.iCount"
+                            @*<a class="cart_quantity_up" href=""> + </a>*@
+                            <input class="cart_quantity_input" style="width:60px" type="number" name="quantity" value="@item.iCount"
                                    autocomplete="off" size="2">
-                            <a class="cart_quantity_down" href=""> - </a>
+                            @*<a class="cart_quantity_down" href=""> - </a>*@
                         </div>
                     </td>
                     <td class="cart_total">
-                        <p class="cart_total_price">$@item.dPrice</p>
+                        <p class="cart_total_price">$@item.dTotal</p>
+                    </td>
+                    <td >
+                        <input type="submit" style="color:white;background-color: #fe980f; border: none;"value="Cập nhật" />
                     </td>
                     <td class="cart_delete">
-                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                        <a href="@Url.Action("XoaSPKhoiGioHang", "Cart", new { @iMaSach = item.iMaSP })"><i class="fa fa-times"></i></a>
+                        @*@Html.ActionLink("Xóa", "XoaSPKhoiGioHang", new { @iMaSach = item.iMaSP})*@
                     </td>
-                </tr>
+
+                }
+            </tr>
             }
 
 

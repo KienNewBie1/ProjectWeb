@@ -7,28 +7,26 @@
     <!--product-details-->
         <div class="col-sm-5">
             <div class="view-product">
-                <img src="@Model.Image" alt="">
+                <img src="~/images/@Model.Image" alt="">
             </div>
             <div id="similar-product" class="carousel slide" data-ride="carousel">
-
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                        <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                        <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar1.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar2.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar3.jpg" alt=""></a>
                     </div>
                     <div class="item">
-                        <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                        <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                        <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar1.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar2.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar3.jpg" alt=""></a>
                     </div>
                     <div class="item">
-                        <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                        <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                        <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar1.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar2.jpg" alt=""></a>
+                        <a href=""><img src="~/images/product-details/similar3.jpg" alt=""></a>
                     </div>
-
                 </div>
 
                 <!-- Controls -->
@@ -44,27 +42,29 @@
         <div class="col-sm-7">
             <div class="product-information">
                 <!--/product-information-->
-                <img src="images/product-details/new.jpg" class="newarrival" alt="">
+                <img src="~/images/product-details/new.jpg" class="newarrival" alt="">
                 <h2>@Model.Name</h2>
                 <p>Web ID: @Model.Id</p>
-                <img src="images/product-details/rating.png" alt="">
+                <p><img src="~/images/product-details/rating.png" alt=""></p>
                 <span>
                     <span>US $@Model.Price</span>
-                    <label>Quantity:</label>
+                    <label>Quantity: @Model.Count</label>
                     <input type="text" value="@Model.Count">
-                    <button type="button" class="btn btn-fefault cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        Add to cart
-                    </button>
-                </span>
+                    <a href="@Url.Action("ThemGioHang","Cart" ,new {ms = Model.Id, url = Request.Url.ToString()})">
+                        <button type="button" class="btn btn-fefault cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            Add to cart
+                        </button>
+                    </a>
+                </span>                
                 <p><b>Kho :</b>Còn Hàng</p>
                 <p><b>Tình Trạng :</b> Mới </p>
                 <p><b>Thương Hiệu :</b>ABC</p>
                 <p><b>Mô Tả :</b> @Model.Description</p>
                 @*<p style="padding:20px;padding-top:50px;">Mô tả :
-                        @Html.Raw(@item.Description.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
-                    </p>*@
-                <a href=""><img src="images/product-details/share.png" class="share img-responsive" alt=""></a>
+            @Html.Raw(@item.Description.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+        </p>*@
+                <a href=""><img src="~/images/product-details/share.png" class="share img-responsive" alt=""></a>
             </div><!--/product-information-->
         </div>
 </div>

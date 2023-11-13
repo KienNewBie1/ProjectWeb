@@ -17,6 +17,23 @@ namespace ProjectWeb.Controllers
 		//	return db.Products.OrderByDescending(a =>
 		//	a.Id).Take(count).ToList();
 		//}
+		public ActionResult PartialCategoryID(int id)
+		{
+			//ViewBag.MaCD = id;
+			//int iSize = 3;
+			//int iPageNum = (page ?? 1);
+
+			var sach = from s in db.Categories where s.Id == id select s;
+			return View(sach);
+		}
+
+		public ActionResult FilterProductById(int productId)
+		{
+			// Logic để lọc sản phẩm theo ID ở đây
+			// Trả về view hoặc dữ liệu JSON tùy thuộc vào yêu cầu của bạn
+			return View(db.Products.ToList());
+		}
+
 		private List<Product> LaySachMoi(int count)
 		{
 			return db.Products.OrderByDescending(a =>

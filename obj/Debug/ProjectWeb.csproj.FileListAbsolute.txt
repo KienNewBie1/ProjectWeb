@@ -84,4 +84,5 @@ D:\C#\ProjectWeb\obj\Debug\ProjectWeb.csproj.CoreCompileInputs.cache
 D:\C#\ProjectWeb\obj\Debug\ProjectWeb.csproj.CopyComplete
 D:\C#\ProjectWeb\obj\Debug\ProjectWeb.dll
 D:\C#\ProjectWeb\obj\Debug\ProjectWeb.pdb
-D:\C#\ProjectWeb\obj\Debug\ProjectWeb.csproj.AssemblyReference.cache
+D:\C#\ProjectWeb\obj\Debug\ProjectWeb.Migrations.oneKin.resources
+D:\C#\ProjectWeb\obj\Debug\ProjectWeb.csproj.GenerateResource.cache

@@ -28,10 +28,10 @@ namespace ProjectWeb.Controllers
 		{
             return PartialView();
 		}
-        public ActionResult PartialCart()
-        {
-            return PartialView(db.Products.ToList());
-        }
+        //public ActionResult PartialCart()
+        //{
+        //    return PartialView(db.Products.ToList());
+        //}
         public List<Cart> LayGioHang()
         {
             List<Cart> lstGioHang = Session["Cart"] as List<Cart>;
@@ -90,7 +90,7 @@ namespace ProjectWeb.Controllers
             ViewBag.TongTien = TongTien();
             return View(lstGioHang);
         }
-        public ActionResult GioHangPartial()
+        public ActionResult PartialCart()
         {
             ViewBag.TongSoLuong = TongSoLuong();
             ViewBag.TongTien = TongTien();
@@ -106,10 +106,10 @@ namespace ProjectWeb.Controllers
                 lstGioHang.RemoveAll(n => n.iMaSP == iMaSach);
                 if (lstGioHang.Count == 0)
                 {
-                    return RedirectToAction("Index", "SachOnline");
+                    return RedirectToAction("Index", "Home");
                 }
             }
-            return RedirectToAction("GioHang");
+            return RedirectToAction("Index","Cart");
         }
 
 
@@ -119,9 +119,9 @@ namespace ProjectWeb.Controllers
             Cart sp = lstGioHang.SingleOrDefault(n => n.iMaSP == iMaSach);
             if (sp != null)
             {
-                sp.iCount = int.Parse(f["txtSoLuong"].ToString());
+                sp.iCount = int.Parse(f["quantity"].ToString());
             }
-            return RedirectToAction("GioHang");
+            return RedirectToAction("Index");
         }
         public ActionResult XoaGioHang()
         {
