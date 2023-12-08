@@ -19,12 +19,12 @@ namespace ProjectWeb.Data
         {
         }
 
-		public System.Data.Entity.DbSet<ProjectWeb.Models.Category> Categories { get; set; }
+		public System.Data.Entity.DbSet<ProjectWeb.Models.ShopWatchEntities> Categories { get; set; }
 
-		public System.Data.Entity.DbSet<ProjectWeb.Models.Brand> Brands { get; set; }
+		public System.Data.Entity.DbSet<ProjectWeb.Models.ShopWatchEntities> Brands { get; set; }
 
-		public System.Data.Entity.DbSet<ProjectWeb.Models.Product> Products { get; set; }
+		public System.Data.Entity.DbSet<ProjectWeb.Models.ShopWatchEntities> Products { get; set; }
 
-		public System.Data.Entity.DbSet<ProjectWeb.Models.Customer> Customers { get; set; }
+		public System.Data.Entity.DbSet<ProjectWeb.Models.ShopWatchEntities> Customers { get; set; }
 	}
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectWeb.Models.Product>
+﻿@model IEnumerable<ProjectWeb.Models.Products>
 
 @{
     ViewBag.Title = "Index";
@@ -15,19 +15,24 @@
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            Tên sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @*@Html.DisplayNameFor(model => model.Description)*@
+            Mô tả
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @*@Html.DisplayNameFor(model => model.Price)*@
+            Giá
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
+        <th style="text-align: center">
+            @*@Html.DisplayNameFor(model => model.Image)*@
+            Hình ảnh
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Count)
+        <th style="width:79px; text-align:center">
+            @*@Html.DisplayNameFor(model => model.Count)*@
+            Số lượng
         </th>
         <th></th>
     </tr>
@@ -43,13 +48,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
+        <td >
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Image)
+            @*@Html.DisplayFor(modelItem => item.Image)*@
+            <img style="height:130px;width:130px" src="~/images/@item.Image" />
         </td>
-        <td>
+        <td style="text-align: center">
             @Html.DisplayFor(modelItem => item.Count)
         </td>
         <td style="width: 230px"

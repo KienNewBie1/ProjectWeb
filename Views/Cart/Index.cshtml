@@ -4,7 +4,39 @@
     ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_LayoutCart.cshtml";
 }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
 
+/*    .quantity-containerr {
+        display: flex;
+        align-items: center;
+    }*/
+
+    .quantity-btnn {
+        background-color: #fe980f;
+        color: #fff;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .quantity-inputt {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+        width: 40px;
+        margin: 0 10px;
+    }
+</style>
 <div class="table-responsive cart_info">
     <table class="table table-condensed">
         <thead>
@@ -20,98 +52,114 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td class="cart_product">
-
-                    <a href=""><img style="width:110px;height:110px" src="~/images/@item.sImages" alt=""></a>
-                </td>
-                <td class="cart_description">
-                    <h4><a href="">@item.sName</a></h4>
-                    <p>Web ID: @item.iMaSP</p>
-                </td>
-                @using (Html.BeginForm("CapNhatGioHang", "Cart", new { iMaSach = item.iMaSP }))
-                {
-                    <td class="cart_price">
-                        <p>$@item.dPrice</p>
-                    </td>
-                    <td class="cart_quantity">
-                        <div class="cart_quantity_button">
-                            @*<a class="cart_quantity_up" href=""> + </a>*@
-                            <input class="cart_quantity_input" style="width:60px" type="number" name="quantity" value="@item.iCount"
-                                   autocomplete="off" size="2">
-                            @*<a class="cart_quantity_down" href=""> - </a>*@
-                        </div>
-                    </td>
-                    <td class="cart_total">
-                        <p class="cart_total_price">$@item.dTotal</p>
-                    </td>
-                    <td >
-                        <input type="submit" style="color:white;background-color: #fe980f; border: none;"value="Cập nhật" />
-                    </td>
-                    <td class="cart_delete">
-                        <a href="@Url.Action("XoaSPKhoiGioHang", "Cart", new { @iMaSach = item.iMaSP })"><i class="fa fa-times"></i></a>
-                        @*@Html.ActionLink("Xóa", "XoaSPKhoiGioHang", new { @iMaSach = item.iMaSP})*@
-                    </td>
-
-                }
-            </tr>
-            }
-
-
-            @*<tr>
-                    <td class="cart_product">
-                        <a href=""><img src="~/images/cart/two.png" alt=""></a>
-                    </td>
-                    <td class="cart_description">
-                        <h4><a href="">Colorblock Scuba</a></h4>
-                        <p>Web ID: 1089772</p>
-                    </td>
-                    <td class="cart_price">
-                        <p>$59</p>
-                    </td>
-                    <td class="cart_quantity">
-                        <div class="cart_quantity_button">
-                            <a class="cart_quantity_up" href=""> + </a>
-                            <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                   autocomplete="off" size="2">
-                            <a class="cart_quantity_down" href=""> - </a>
-                        </div>
-                    </td>
-                    <td class="cart_total">
-                        <p class="cart_total_price">$59</p>
-                    </td>
-                    <td class="cart_delete">
-                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                    </td>
-                </tr>
                 <tr>
                     <td class="cart_product">
-                        <a href=""><img src="~/images/cart/three.png" alt=""></a>
+
+                        <a href=""><img style="width:110px;height:110px" src="~/images/@item.sImages" alt=""></a>
                     </td>
                     <td class="cart_description">
-                        <h4><a href="">Colorblock Scuba</a></h4>
-                        <p>Web ID: 1089772</p>
+                        <h4><a href="">@item.sName</a></h4>
+                        <p>ID: @item.iMaSP</p>
                     </td>
-                    <td class="cart_price">
-                        <p>$59</p>
-                    </td>
-                    <td class="cart_quantity">
-                        <div class="cart_quantity_button">
-                            <a class="cart_quantity_up" href=""> + </a>
-                            <input class="cart_quantity_input" type="text" name="quantity" value="1"
-                                   autocomplete="off" size="2">
-                            <a class="cart_quantity_down" href=""> - </a>
-                        </div>
-                    </td>
-                    <td class="cart_total">
-                        <p class="cart_total_price">$59</p>
-                    </td>
-                    <td class="cart_delete">
-                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                    </td>
-                </tr>*@
+                    @using (Html.BeginForm("CapNhatGioHang", "Cart", new { iMaSach = item.iMaSP }))
+                    {
+                        <td class="cart_price">
+                            <p>$@item.dPrice</p>
+                        </td>
+                        <td class="cart_quantity">
+                            <div class="cart_quantity_button">
+                                @*<a class="cart_quantity_up" href=""> + </a>*@
+                                @*<input class="cart_quantity_input" style="width:60px" type="number" name="quantity" value="@item.iCount"
+                                    autocomplete="off" size="2">*@
+                                <button class="quantity-btnn" onclick="decrement(@item.iMaSP)">-</button>
+                                <input type="text" class="quantity-inputt" value="@item.iCount" id="quantity_@item.iMaSP" name="quantity1" readonly>
+                                <button class="quantity-btnn" onclick="increment(@item.iMaSP)">+</button>
+                                @*<a class="cart_quantity_down" href=""> - </a>*@
+                            </div>
+                        </td>
+                        <td class="cart_total">
+                            <p class="cart_total_price">$@item.dTotal</p>
+                        </td>
+                        @*<td>
+                                <input type="submit" style="color:white;background-color: #fe980f; border: none;" value="Cập nhật" />
+                            </td>*@
+                        <td class="cart_delete">
+                            <a href="@Url.Action("XoaSPKhoiGioHang", "Cart", new { @iMaSach = item.iMaSP })"><i class="fa fa-times"></i></a>
+                            @*@Html.ActionLink("Xóa", "XoaSPKhoiGioHang", new { @iMaSach = item.iMaSP})*@
+                        </td>
+
+                    }
+                </tr>
+            }
         </tbody>
     </table>
 </div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true);
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>Đơn Hàng Của Bạn.</h3>
+                <p>Cảm ơn bạn đã tin tưởng DK-D'LENKA</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="chose_area">
+                        <ul class="user_option">
+                            @*<li>
+                <input type="checkbox">
+                <label>Use Gift Voucher</label>
+            </li>
+            <li>
+                <input type="checkbox">
+                <label>Estimate Shipping &amp; Taxes</label>
+            </li>*@
+                        </ul>
+                        <ul class="user_option">
+                            <li>Tên Người Nhận:<label><b><input style="border: none;background: #f4f4f4;color:#fe980f;"type="text" id="myText" value="Trần Thùy Lam"></b></label></li>                           
+                            <li>Địa Chỉ:<label><b>45 Trần Văn Ơn,Thủ Dầu Một, Bình Dương</b></label></li>
+                            <li>Số Điện Thoại:<label><b>0869053045</b></label></li>
+                            <li>Ngày Đặt:<label><b>@DateTime.Now.ToShortDateString()</b></label></li>
+                            <li>Ngày Giao:<label><input name="NgayGiao" type="date" /></label></li>
+                        </ul>
+                        <a class="btn btn-default update" href="~/Cart/XoaGioHang">Xóa Giỏ Hàng</a>
+                        <a class="btn btn-default check_out" onclick="myFunction()" href="">Chỉnh Sửa</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 pull-right">
+                    <div class="total_area">
+                        <ul>
+                            <li>Tạm Tính:<span>$@ViewBag.TongTien</span></li>
+                            <li>Phí Giao Hàng:<span>Miễn Phí</span></li>
+                            <li>Tổng Cộng: <span>$@ViewBag.TongTien</span></li>
+                        </ul>
+                        <a class="btn btn-default update" href="~/Home/Index">Thoát</a>
+                        <a class="btn btn-default check_out" href="@Url.Action("Dat", "Cart")">Thanh Toán</a>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </section>
+}
+<script>
+    function myFunction() {
+        var a = document.getElementById("myText").value
+        document.getElementById("myText").value = a;
+    }
+</script>
+<script>
+    function increment(id) {
+        var quantityInput = document.getElementById('quantity_' + id);
+        var currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    }
 
-
+    function decrement(id) {
+        var quantityInput = document.getElementById('quantity_' + id);
+        var currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    }
+</script>

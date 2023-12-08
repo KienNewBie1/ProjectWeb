@@ -13,7 +13,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
 {
     public class CustomersController : Controller
     {
-        private ProjectWebContext db = new ProjectWebContext();
+        private ShopWatchEntities db = new ShopWatchEntities();
 
         // GET: Admin/Customers
         public ActionResult Index()
@@ -28,7 +28,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customers customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,UserName,Password,Email,Phone,Address")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,Name,UserName,Password,Email,Phone,Address")] Customers customer)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customers customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,UserName,Password,Email,Phone,Address")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,Name,UserName,Password,Email,Phone,Address")] Customers customer)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customers customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
+            Customers customer = db.Customers.Find(id);
             db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -124,10 +124,17 @@ namespace ProjectWeb.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Logout(string url)
+        {
+            Session.Clear();
+            //Session.RemoveAll();
+            //Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
         [HttpGet]
         public ActionResult Login()
 		{
-            return View(db.Customers.ToList());
+            return View(db.ADMIN.ToList());
 		}
         [HttpPost]
         public ActionResult Login(FormCollection collection)
@@ -144,7 +151,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             }
             else
             {
-                Customer kh = db.Customers.SingleOrDefault(n => n.UserName == tendn && n.Password == matkhau);
+                ADMIN kh = db.ADMIN.SingleOrDefault(n => n.UserName == tendn && n.Password == matkhau);
                 //KhachHang kh = db.KhachHangs.SingleOrDefault(n => n.TaiKhoan == tendn && n.MatKhau == matkhau);
                 if (kh != null)
                 {

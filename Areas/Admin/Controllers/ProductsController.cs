@@ -16,12 +16,12 @@ namespace ProjectWeb.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
-        private ProjectWebContext db = new ProjectWebContext();
+        private ShopWatchEntities db = new ShopWatchEntities();
 
         // GET: Admin/Products
         public ActionResult Index()
         {
-			var products = db.Products.Include(p => p.Category);
+			var products = db.Products.Include(p => p.Categories);
 			//int iPageNum = (page ?? 1);
 			//int iSize = 3;
 			//var sp = from s in db.Products where s.Id == id select s;
@@ -36,7 +36,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -58,7 +58,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,CategoryId,Price,Image,Count")] Product product, HttpPostedFileBase Image)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,CategoryId,Price,Image,Count")] Products product, HttpPostedFileBase Image)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,CategoryId,Price,Image,Count")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,CategoryId,Price,Image,Count")] Products product)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -128,7 +128,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
+            Products product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -10,7 +10,7 @@ namespace ProjectWeb.Controllers
 {
     public class CartController : Controller
     {
-        private ProjectWebContext db = new ProjectWebContext();
+        private ShopWatchEntities db = new ShopWatchEntities();
         // GET: Cart
         public ActionResult Index()
         {
@@ -112,6 +112,16 @@ namespace ProjectWeb.Controllers
             return RedirectToAction("Index","Cart");
         }
 
+        public List<Cart> LayDsSpThanhToan()
+        {
+            List<Cart> lstSPThanhToan = Session["DSThanhToan"] as List<Cart>;
+            if (lstSPThanhToan == null)
+            {
+                lstSPThanhToan = new List<Cart>();
+                Session["DSThanhToan"] = lstSPThanhToan;
+            }
+            return lstSPThanhToan;
+        }
 
         public ActionResult CapNhatGioHang(int iMaSach, FormCollection f)
         {
@@ -119,7 +129,7 @@ namespace ProjectWeb.Controllers
             Cart sp = lstGioHang.SingleOrDefault(n => n.iMaSP == iMaSach);
             if (sp != null)
             {
-                sp.iCount = int.Parse(f["quantity"].ToString());
+                sp.iCount = int.Parse(f["quantity1"].ToString());
             }
             return RedirectToAction("Index");
         }
@@ -127,55 +137,76 @@ namespace ProjectWeb.Controllers
         {
             List<Cart> lstGioHang = LayGioHang();
             lstGioHang.Clear();
-            return RedirectToAction("Index", "SachOnline");
+            return RedirectToAction("Index", "Home");
         }
-        //[HttpGet]
-        //public ActionResult DatHang()
-        //{
-        //    if (Session["TaiKhoan"] == null || Session["TaiKhoan"].ToString() == "")
-        //    {
-        //        return RedirectToAction("DangNhap", "NguoiDung");
-        //    }
-        //    if (Session["GioHang"] == null)
-        //    {
-        //        return RedirectToAction("Index", "SachOnline");
-        //    }
-        //    // lay hang tu session
-        //    List<Cart> lstGioHang = LayGioHang();
-        //    ViewBag.TongSoLuong = TongSoLuong();
-        //    ViewBag.TongTien = TongTien();
-        //    return View(lstGioHang);
-        //}
+        [HttpPost]
+        public ActionResult DatHang(List<int> selectedValues)
+        {
+            if (Session["Customers"] == null || Session["Customers"].ToString() == "")
+            {
+                return RedirectToAction("Login", "Customers");
+            }
+            if (Session["Cart"] == null)
+            {
+                return RedirectToAction("Index", "Cart");
+            }
+            List<Cart> lstSPThanhToan = LayDsSpThanhToan();
+            List<Cart> lstGioHang = LayGioHang();
 
-        //[HttpPost]
-        //public ActionResult DatHang(FormCollection f)
-        //{
-        //    DONDATHANG ddh = new DONDATHANG();
-        //    KhachHang kh = (KhachHang)Session["TaiKhoan"];
-        //    List<GioHang> lstGioHang = LayGioHang();
-        //    ddh.MaKH = kh.MaKH;
-        //    ddh.NgayDH = DateTime.Now;
-        //    var NgayGiao = String.Format("{0:MM/dd/yyyy}", f["NgayGiao"]);
-        //    ddh.NgayGiaoHang = DateTime.Parse(NgayGiao);
-        //    ddh.HTGiaoHang = true;
-        //    ddh.HTThanhToan = false;
-        //    db.DONDATHANGs.InsertOnSubmit(ddh);
-        //    db.SubmitChanges();
-        //    foreach (var item in lstGioHang)
-        //    {
-        //        CTDATHANG ctdh = new CTDATHANG();
-        //        ctdh.MaKH = (long)ddh.MaKH;
-        //        ctdh.SoDH = ddh.SoDH;
-        //        ctdh.MaSach = item.iMaSach;
-        //        ctdh.SoLuong = item.iSoLuong;
-        //        ctdh.DonGia = item.dDonGia;
-        //        db.CTDATHANGs.InsertOnSubmit(ctdh);
-        //    }
-        //    db.SubmitChanges();
-        //    Session["GioHang"] = null;
-        //    return RedirectToAction("XacNhanDonHang", "GioHang");
-        //}
+            if (selectedValues != null)
+            {
+                foreach (var id in selectedValues)
+                {
+                    Cart sp = lstGioHang.Find(n => n.iMaSP == id);
+                    lstSPThanhToan.Add(sp);
+                }
+            }
+            return RedirectToAction("Dat", lstSPThanhToan);
+        }
 
+        [HttpGet]
+        public ActionResult DatHang()
+        {
+            List<Cart> lstSPThanhToan = LayDsSpThanhToan();
+            return View(lstSPThanhToan);
+
+        }
+          public ActionResult Dat(FormCollection f)
+        {
+            if (Session["UserName"] == null || Session["UserName"].ToString() == "")
+            {
+                return RedirectToAction("Login", "Customer");
+            }
+            if (Session["Cart"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            Order order = new Order();
+            Customers kh = (Customers)Session["UserName"];
+            List<Cart> lstGioHang = LayGioHang();
+            order.MaKH = kh.Id;
+            order.NgayDH = DateTime.Now;
+            var NgayGiao = DateTime.Now;
+            order.NgayGiaoHang = NgayGiao;
+			order.HTGiaoHang = true;
+            order.HTThanhToan = false;
+            db.Order.Add(order);
+            db.SaveChanges();
+            //foreach (var item in lstGioHang)
+            //{
+            //    ct ctdh = new CTDATHANG();
+            //    ctdh.SoDH = ddh.SoDH;
+            //    ctdh.MaSach = item.iMaSach;
+            //    ctdh.SoLuong = item.iSoLuong;
+            //    ctdh.DonGia = (decimal)item.dDonGia;
+            //    db.CTDATHANGs.InsertOnSubmit(ctdh);
+            //}
+            //db.SubmitChanges();
+            Session["Cart"] = null;
+            ViewBag.mess = "Đặt Hàng Thành công";
+            return RedirectToAction("Index", "Home");
+
+        }
         public ActionResult ConfirmCart()
         {
             return View();

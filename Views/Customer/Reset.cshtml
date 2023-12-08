@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Reset";
+    Layout = "~/Views/Shared/_LayoutProducts.cshtml";
+}
+
+<div class="col-sm-5 col-sm-offset-3">
+    <div class="login-form">
+        <!--login form-->
+        <h2>Tạo lại mật khẩu cho:</h2>
+            
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <input name="PassWord" type="password" placeholder="Mật Khẩu Mới">
+            <input name="PassWord" type="password" placeholder="Nhập Lại Mật Khẩu">
+            <span>
+                <input type="checkbox" class="checkbox">
+                Ghi nhớ thông tin
+            </span>
+            <button type="submit" class="btn btn-default">Xác Nhận</button>
+        }
+        </div><!--/login form-->
+</div>
+

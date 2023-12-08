@@ -1,0 +1,43 @@
+﻿@*@model PagedList.PagedList<ProjectWeb.Models.Products>s*@
+@*@using PagedList.Mvc;*@
+@model IEnumerable<ProjectWeb.Models.Products>
+@{
+    ViewBag.Title = "San Pham";
+    Layout = "~/Views/Shared/_LayoutProducts.cshtml";
+}
+<h2 class="title text-center">Sản Phẩm Mới</h2>
+@foreach (var item in Model)
+{
+    <div class="col-sm-4">
+        <div class="product-image-wrapper">
+            <div class="single-products">
+                <div class="productinfo text-center">
+                    <a href="~/Home/DetailProduct/@item.Id" @*href="@Url.Action("DetailProduct","Home",new {id = @item.Id})*@>
+                        <img src="~/images/@item.Image" alt="" />
+                    </a>
+                    <h2>$@item.Price</h2>
+                    <a @*href="~/Home/DetailProduct?@item.Id"*@ href="@Url.Action("DetailProduct", "Home")">
+                        <p>@item.Name</p>
+                    </a>
+                    <a href="@Url.Action("ThemGioHang","Cart" ,new {ms = @item.Id, url = Request.Url.ToString()})" class="btn btn-default add-to-cart" role="button">
+                        <i class="fa fa-shopping-cart">Add to cart</i>
+                    </a>
+                </div>
+            </div>
+            <div class="choose">
+                <ul class="nav nav-pills nav-justified">
+                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+<ul class="pagination">
+    <li class="active"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li><a href="">&raquo;</a></li>
+</ul>
+

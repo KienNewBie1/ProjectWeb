@@ -13,8 +13,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ProjectWebContext db = new ProjectWebContext();
-
+        private ShopWatchEntities db = new ShopWatchEntities();
         // GET: Admin/Categories
         public ActionResult Index()
         {
@@ -28,7 +27,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Categories category = db.Categories.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -47,7 +46,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Category category)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Categories category)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +65,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Categories category = db.Categories.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -79,7 +78,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Categories category)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +96,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Categories category = db.Categories.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -110,7 +109,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
+            Categories category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");

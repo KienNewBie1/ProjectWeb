@@ -8,7 +8,7 @@ namespace ProjectWeb.Models
 {
 	public class Cart
 	{
-		private ProjectWebContext db = new ProjectWebContext();
+		private ShopWatchEntities db = new ShopWatchEntities();
 		public int iMaSP { get; set; }
 		public string sName { get; set; }
 		public string sImages { get; set; }
@@ -23,7 +23,7 @@ namespace ProjectWeb.Models
 		public Cart(int ms)
 		{
 			iMaSP = ms;
-			Product s = db.Products.Single(n => n.Id == iMaSP);
+			Products s = db.Products.Single(n => n.Id == iMaSP);
 			sName = s.Name;
 			sImages = s.Image;
 			dPrice = s.Price;

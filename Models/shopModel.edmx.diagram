@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="af70bc12bcb24f6eba53440008f9ccc5" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopWatchModel.ADMIN" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopWatchModel.Brands" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopWatchModel.Categories" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopWatchModel.Customers" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopWatchModel.Products" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopWatchModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopWatchModel.Order" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="ShopWatchModel.FK_dbo_Products_dbo_Brands_Brand_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopWatchModel.FK_dbo_Products_dbo_Categories_CategoryId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShopWatchModel.ChangePassword" Width="1.5" PointX="0.75" PointY="8.5" />
+        <AssociationConnector Association="ShopWatchModel.FK_ChangePassword_Customers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

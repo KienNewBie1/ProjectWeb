@@ -25,6 +25,7 @@
 </head><!--/head-->
 
 <body>
+
     <header id="header">
         <!--header-->
         <div class="header_top">
@@ -60,20 +61,21 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html" style="height:90px"><img src="~/images/newlogo1.png" alt="" /></a>
+                            <a href="~/Home/Index" style="height:90px"><img src="~/images/newlogo1.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
 
-                                <li><a href="#"><i class="fa fa-star"></i> Danh Sách Yêu Thích</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                @Html.Action("PartialCart","Cart")
-                                @*<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>*@
+                                <li><a href="~/Home/Index"><i class="fa fa-star"></i> Danh Sách Yêu Thích</a></li>
+                                <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                @*<li><a href="~/Cart/Index"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>*@
+                                @Html.Action("PartialCart", "Cart")
                                 @*<li><a href="~/User/Logout"><i class="fa fa-sign-out"></i> Đăng Xuất</a></li>*@
-                                <li><a href="~/Customer/Login"><i class="fa fa-sign-in"></i> Đăng Nhập</a></li>
-                                <li><a href="~/Customer/Register"><i class="fa fa-plus-circle"></i>Đăng ký</a></li>
+                                @*<li><a href="~/Customer/Login"><i class="fa fa-sign-in"></i> Đăng Nhập</a></li>
+                                    <li><a href="~/Customer/Register"><i class="fa fa-plus-circle"></i>Đăng ký</a></li>*@
+                                @Html.Action("LoginLogoutPartial", "Customer")
                             </ul>
                         </div>
                     </div>
@@ -86,21 +88,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-9">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                    data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
+                        
                         @Html.Action("_PartialNavbar", "Home")
                     </div>
                     <div class="col-sm-3">
-                        <div class="search_box pull-right">
-                            <input type="text" placeholder="Search" />
-                        </div>
+                        @Html.Action("Search", "Home")
+                        @*<form name="search">
+                                <div class="search_box pull-right">
+                                    <input type="text" name="Search" style="border: 1px solid;" placeholder="Tìm Kiếm" />
+                                    <button type="submit" name="Search" style="color: #fe980f;border: 1px solid;">Tìm Kiếm</button>
+                                </div>
+                            </form>*@
                     </div>
                 </div>
             </div>
@@ -118,8 +116,9 @@
             @RenderBody()
         </div>
     </section> <!--/#cart_items-->
+    @*@Html.Action("PayPartial", "Cart")s*@
 
-    @Html.Action("PayPartial", "Cart")
+
 
     <footer id="footer">
         <!--Footer-->
@@ -128,7 +127,7 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="companyinfo">
-                            <h2><span>e</span>-shopper</h2>
+                            <h2><span>DK</span>-D'LENKA</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                         </div>
                     </div>
@@ -288,7 +287,6 @@
     </footer><!--/Footer-->
 
 
-
     @RenderSection("Scripts", required: false)
     <script src="~/Content/js/jquery.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>
@@ -296,6 +294,7 @@
     <script src="~/Content/js/price-range.js"></script>
     <script src="~/Content/js/jquery.prettyPhoto.js"></script>
     <script src="~/Content/js/main.js"></script>
+
 </body>
 
 </html>

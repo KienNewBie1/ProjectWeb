@@ -1,0 +1,10 @@
+﻿@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = " form-inline" }))
+{
+<div class="col-sm-3 pull-right">
+    <form action="/" class=" form-inline" method="get">
+        <div class="search_box pull-right">
+            <input type="Text" class="form-control mx-sm-3" name="searchString" placeholder="Tìm sản phẩm">
+            @*<input type="submit" class="btn btn-danger" value="Tìm" style="width: 50px;">*@
+        </div><hr />
+</div>
+ }

@@ -13,7 +13,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
 {
     public class BrandsController : Controller
     {
-        private ProjectWebContext db = new ProjectWebContext();
+        private ShopWatchEntities db = new ShopWatchEntities();
 
         // GET: Admin/Brands
         public ActionResult Index()
@@ -28,7 +28,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Brand brand = db.Brands.Find(id);
+            Brands brand = db.Brands.Find(id);
             if (brand == null)
             {
                 return HttpNotFound();
@@ -47,7 +47,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Brand brand)
+        public ActionResult Create([Bind(Include = "Id,Name")] Brands brand)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Brand brand = db.Brands.Find(id);
+            Brands brand = db.Brands.Find(id);
             if (brand == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Brand brand)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Brands brand)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Brand brand = db.Brands.Find(id);
+            Brands brand = db.Brands.Find(id);
             if (brand == null)
             {
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace ProjectWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Brand brand = db.Brands.Find(id);
+            Brands brand = db.Brands.Find(id);
             db.Brands.Remove(brand);
             db.SaveChanges();
             return RedirectToAction("Index");

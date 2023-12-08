@@ -1,7 +1,17 @@
-﻿@model IEnumerable<ProjectWeb.Models.Category>
+﻿@model IEnumerable<ProjectWeb.Models.Categories>
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+</div>
 <div class="mainmenu pull-left">
     <ul class="nav navbar-nav collapse navbar-collapse">
-        <li class="active"><a href="~/Home/Index">Trang Chủ</a></li>
+        <li><a href="~/Home/Index">Trang Chủ</a></li>
+        <li><a href="~/Home/aa">Sản Phẩm</a></li>
         @foreach (var item in Model)
         {
             <li class="active"><a href="#">@item.Name</a></li>
