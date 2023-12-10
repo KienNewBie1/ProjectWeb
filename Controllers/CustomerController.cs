@@ -93,13 +93,13 @@ namespace ProjectWeb.Controllers
 
         public ActionResult Reset([Bind(Include = "Id,Password")] Customers customer)
         {
-            var sEmail = Session["Email"]?.ToString(); // Chắc chắn rằng không null
+            var sEmail = Session["Email"]?.ToString(); // không null
             if (sEmail != null)
             {
                 var existingCustomer = db.Customers.SingleOrDefault(c => c.Email == sEmail);
                 if (existingCustomer != null)
                 {
-                    existingCustomer.Password = customer.Password; // Thay đổi mật khẩu
+                    existingCustomer.Password = customer.Password; // Thay đổi mật khẩu a = b 
 
                     try
                     {
@@ -109,7 +109,7 @@ namespace ProjectWeb.Controllers
                     }
                     catch (DbEntityValidationException ex)
                     {
-                        // Xử lý lỗi kiểm tra ở đây
+                        // Xử lý lỗi
                         foreach (var validationErrors in ex.EntityValidationErrors)
                         {
                             foreach (var validationError in validationErrors.ValidationErrors)
@@ -120,8 +120,6 @@ namespace ProjectWeb.Controllers
                     }
                 }
             }
-
-            // Nếu không thực hiện được việc đặt lại mật khẩu, quay về trang Login
             return View("Login", customer);
         }
 

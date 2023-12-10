@@ -1,5 +1,5 @@
-﻿@model IEnumerable<ProjectWeb.Models.Categories>
+﻿@model IEnumerable<ProjectWeb.Models.Products>
 @foreach (var item in Model)
 {
-    <li><a href="@Url.Action("PartialCategoryID","Home",new {id = item.Id})" data-toggle="tab">@item.Name</a></li>
+    <li><a href="#@item.CategoryId" data-toggle="tab">@item.Name</a></li>
 }

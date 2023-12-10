@@ -66,8 +66,6 @@ namespace ProjectWeb.Controllers
 		public ActionResult Index( int? page, string searchString/* int categoryID = 0*/)
 		{
 			var listSachMoi = LaySachMoi(20);
-			var listProName = GetProductsByName(20);
-			var listProId = GetProductsById(20);
 			int iPageNum = (page ?? 1);
 			int iSize = 3;
 			var link = (from l in db.Products select l).OrderBy("Id");
@@ -109,6 +107,18 @@ namespace ProjectWeb.Controllers
 		//	return View(listSachMoi.ToPagedList(iPageNum, iSize));
 		//	//return View(db.Products.ToList());
 		//}
+
+		public ActionResult BrandById(int id, int? page)
+		{
+			ViewBag.Id = id;
+			var sp = from s in db.Products select s;
+			sp = sp.Where(n => n.Brand_Id == id).OrderBy("Id");
+			int iPageNum = (page ?? 1);
+			int iSize = 3;
+			return View(sp.ToPagedList(iPageNum, iSize));
+			//return View(db.Products.ToList());
+		}
+
 		public ActionResult ProductById(int id,int? page)
 		{
 			ViewBag.Id = id;

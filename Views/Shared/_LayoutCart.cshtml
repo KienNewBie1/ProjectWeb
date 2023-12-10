@@ -88,7 +88,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-9">
-                        
+
                         @Html.Action("_PartialNavbar", "Home")
                     </div>
                     <div class="col-sm-3">
@@ -294,7 +294,27 @@
     <script src="~/Content/js/price-range.js"></script>
     <script src="~/Content/js/jquery.prettyPhoto.js"></script>
     <script src="~/Content/js/main.js"></script>
+    @*<script>
+        function myFunction() {
+            var a = document.getElementById("myText").value
+            document.getElementById("myText").value = a;
+        }
+    </script>*@
+    <script>
+        function increment(id) {
+            var quantityInput = document.getElementById('quantity_' + id);
+            var currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        }
 
+        function decrement(id) {
+            var quantityInput = document.getElementById('quantity_' + id);
+            var currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+    </script>
 </body>
 
 </html>

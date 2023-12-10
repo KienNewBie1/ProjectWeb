@@ -463,6 +463,7 @@
     <Content Include="Views\Home\aa.cshtml" />
     <Content Include="Views\Customer\Reset.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Home\BrandById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

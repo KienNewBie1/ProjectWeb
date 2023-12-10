@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<ProjectWeb.Models.Brands>
 @foreach (var item in Model)
 {
-    <li><a href="#">@item.Name</a></li>
+    <li><a href="@Url.Action("BrandById","Home",new {id = item.Id})">@item.Name</a></li>
 }
